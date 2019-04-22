@@ -1,0 +1,289 @@
+<app-header></app-header>
+<div class="container">
+  <div class="columns">
+    <div class="column is-3">
+      <app-side-nav></app-side-nav>
+    </div>
+    <div class="column is-9">
+      <h3 class="title">Add Airport</h3>
+
+      <form>
+        <div class="columns">
+          <div class="column is-4">
+            <div class="field">
+              <label class="label">Name</label>
+              <div class="control">
+                <input class="input" type="text" name="name" [(ngModel)]="name">
+              </div>
+            </div>
+          </div>
+          <div class="column is-4">
+            <div class="field">
+              <label class="label">Logo URL</label>
+              <div class="control">
+                <input class="input" type="text" name="logo" [(ngModel)]="logo">
+              </div>
+            </div>
+          </div>
+          <div class="column is-4">
+            <div class="field">
+              <label class="label">IATA Code</label>
+              <div class="control">
+                <input class="input" type="text" name="iata_code" [(ngModel)]="iata_code">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="columns">
+            <div class="column is-6">
+              <div class="field">
+                <label class="label">Longitude</label>
+                <div class="control">
+                  <input class="input" type="text" name="longitude" [(ngModel)]="longitude">
+                </div>
+              </div>
+            </div>
+            <div class="column is-6">
+              <div class="field">
+                <label class="label">Latitude</label>
+                <div class="control">
+                  <input class="input" type="text" name="latitude" [(ngModel)]="latitude">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="columns">
+            <div class="column is-6">
+              <div class="field">
+                <label class="label">Primary Phone</label>
+                <div class="control">
+                  <input class="input" type="text" name="phone_primary" [(ngModel)]="phone_primary">
+                </div>
+              </div>
+            </div>
+            <div class="column is-6">
+              <div class="field">
+                <label class="label">Secondary Phone</label>
+                <div class="control">
+                  <input class="input" type="text" name="phone_secondary" [(ngModel)]="phone_secondary">
+                </div>
+              </div>
+            </div>
+          </div>
+        <div class="columns">
+          <div class="column is-6">
+            <div class="field">
+              <label class="label">Primary Email</label>
+              <div class="control">
+                <input class="input" type="text" name="email_primary" [(ngModel)]="email_primary">
+              </div>
+            </div>
+          </div>
+          <div class="column is-6">
+            <div class="field">
+              <label class="label">Secondary Email</label>
+              <div class="control">
+                <input class="input" type="text" name="email_secondary" [(ngModel)]="email_secondary">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="columns">
+          <div class="column is-6">
+            <div class="field">
+              <label class="label">Monday Open Hours</label>
+              <div class="control">
+                <input class="input" type="text" name="monday_open" [(ngModel)]="monday_open">
+              </div>
+            </div>
+          </div>
+          <div class="column is-6">
+            <div class="field">
+              <label class="label">Monday Close Hours</label>
+              <div class="control">
+                <input class="input" type="text" name="monday_close" [(ngModel)]="monday_close">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="columns">
+          <div class="column is-6">
+            <div class="field">
+              <label class="label">Tuesday Open Hours</label>
+              <div class="control">
+                <input class="input" type="text" name="tuesday_open" [(ngModel)]="tuesday_open">
+              </div>
+            </div>
+          </div>
+          <div class="column is-6">
+            <div class="field">
+              <label class="label">Tuesday Close Hours</label>
+              <div class="control">
+                <input class="input" type="text" name="tuesday_close" [(ngModel)]="tuesday_close">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="columns">
+          <div class="column is-6">
+            <div class="field">
+              <label class="label">Wednesday Open Hours</label>
+              <div class="control">
+                <input class="input" type="text" name="wednesday_open" [(ngModel)]="wednesday_open">
+              </div>
+            </div>
+          </div>
+          <div class="column is-6">
+            <div class="field">
+              <label class="label">Wednesday Close Hours</label>
+              <div class="control">
+                <input class="input" type="text" name="wednesday_close" [(ngModel)]="wednesday_close">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="columns">
+          <div class="column is-6">
+            <div class="field">
+              <label class="label">Thursday Open Hours</label>
+              <div class="control">
+                <input class="input" type="text" name="thursday_open" [(ngModel)]="thursday_open">
+              </div>
+            </div>
+          </div>
+          <div class="column is-6">
+            <div class="field">
+              <label class="label">Thursday Close Hours</label>
+              <div class="control">
+                <input class="input" type="text" name="thursday_close" [(ngModel)]="thursday_close">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="columns">
+          <div class="column is-6">
+            <div class="field">
+              <label class="label">Friday Open Hours</label>
+              <div class="control">
+                <input class="input" type="text" name="friday_open" [(ngModel)]="friday_open">
+              </div>
+            </div>
+          </div>
+          <div class="column is-6">
+            <div class="field">
+              <label class="label">Friday Close Hours</label>
+              <div class="control">
+                <input class="input" type="text" name="friday_close" [(ngModel)]="friday_close">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="columns">
+          <div class="column is-6">
+            <div class="field">
+              <label class="label">Saturday Open Hours</label>
+              <div class="control">
+                <input class="input" type="text" name="saturday_open" [(ngModel)]="saturday_open">
+              </div>
+            </div>
+          </div>
+          <div class="column is-6">
+            <div class="field">
+              <label class="label">Saturday Close Hours</label>
+              <div class="control">
+                <input class="input" type="text" name="saturday_close" [(ngModel)]="saturday_close">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="columns">
+          <div class="column is-6">
+            <div class="field">
+              <label class="label">Sunday Open Hours</label>
+              <div class="control">
+                <input class="input" type="text" name="sunday_open" [(ngModel)]="sunday_open">
+              </div>
+            </div>
+          </div>
+          <div class="column is-6">
+            <div class="field">
+              <label class="label">Sunday Close Hours</label>
+              <div class="control">
+                <input class="input" type="text" name="sunday_close" [(ngModel)]="sunday_close">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="columns">
+          <div class="column is-6">
+            <div class="field">
+              <label class="label">Runway 1</label>
+              <div class="control">
+                <input class="input" type="text" name="runway_1" [(ngModel)]="runway_1">
+              </div>
+            </div>
+          </div>
+          <div class="column is-6">
+            <div class="field">
+              <label class="label">Diagram</label>
+              <div class="control">
+                <input class="input" type="text" name="runway_1_diagram" [(ngModel)]="runway_1_diagram">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="columns">
+          <div class="column is-6">
+            <div class="field">
+              <label class="label">Runway 2</label>
+              <div class="control">
+                <input class="input" type="text" name="runway_2" [(ngModel)]="runway_2">
+              </div>
+            </div>
+          </div>
+          <div class="column is-6">
+            <div class="field">
+              <label class="label">Diagram</label>
+              <div class="control">
+                <input class="input" type="text" name="runway_2_diagram" [(ngModel)]="runway_2_diagram">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="columns">
+          <div class="column is-6">
+            <div class="field">
+              <label class="label">Runway 3</label>
+              <div class="control">
+                <input class="input" type="text" name="runway_3" [(ngModel)]="runway_3">
+              </div>
+            </div>
+          </div>
+          <div class="column is-6">
+            <div class="field">
+              <label class="label">Diagram</label>
+              <div class="control">
+                <input class="input" type="text" name="runway_3_diagram" [(ngModel)]="runway_3_diagram">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="columns">
+          <div class="column is-6">
+            <div class="field is-grouped">
+              <div class="control">
+                <button class="button is-link" id="addBtn" (click)="addAirport()">Submit</button>
+              </div>
+              <div class="control">
+                <button class="button is-text" type="reset">Reset</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<app-chat></app-chat>

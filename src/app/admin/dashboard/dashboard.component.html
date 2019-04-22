@@ -1,0 +1,80 @@
+<app-header></app-header>
+<div class="container">
+  <div class="columns">
+    <div class="column is-3">
+      <app-side-nav></app-side-nav>
+    </div>
+    <div class="column is-9">
+      <div class="container">
+        <div class="columns is-multiline">
+          <div class="column is-9">
+
+            <div class="columns">
+              <div class="column is-4">
+                <div class="field has-addons">
+                  <p class="control">
+                    <a class="button is-primary" mwlCalendarPreviousView [view]="view" [(viewDate)]="viewDate"
+                      (viewDateChange)="activeDayIsOpen = false">
+                      Previous
+                    </a>
+                  </p>
+                  <p class="control">
+                    <a class="button is-primary is-outlined" mwlCalendarToday [(viewDate)]="viewDate">
+                      Today
+                    </a>
+                  </p>
+                  <p class="control">
+                    <a class="button is-primary" mwlCalendarNextView [view]="view" [(viewDate)]="viewDate"
+                      (viewDateChange)="activeDayIsOpen = false">
+                      Next
+                    </a>
+                  </p>
+                </div>
+              </div>
+              <div class="column is-4">
+                <h3 class="title has-text-centered">{{ viewDate | calendarDate:(view + 'ViewTitle'):'en' }}</h3>
+              </div>
+              <div class="column is-4">
+                <div class="field has-addons is-pulled-right">
+                  <p class="control">
+                    <a class="button is-primary" (click)="view = CalendarView.Month"
+                      [class.active]="view === CalendarView.Month">
+                      Month
+                    </a>
+                  </p>
+                  <p class="control">
+                    <a class="button is-primary" (click)="view = CalendarView.Week"
+                      [class.active]="view === CalendarView.Week">
+                      Week
+                    </a>
+                  </p>
+                  <p class="control">
+                    <a class="button is-primary" (click)="view = CalendarView.Day"
+                      [class.active]="view === CalendarView.Day">
+                      Day
+                    </a>
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div [ngSwitch]="view">
+              <mwl-calendar-month-view *ngSwitchCase="CalendarView.Month" [viewDate]="viewDate" [events]="events"
+                [refresh]="refresh" [activeDayIsOpen]="activeDayIsOpen" (dayClicked)="dayClicked($event.day)"
+                (eventClicked)="handleEvent('Clicked', $event.event)" (eventTimesChanged)="eventTimesChanged($event)">
+              </mwl-calendar-month-view>
+              <mwl-calendar-week-view *ngSwitchCase="CalendarView.Week" [viewDate]="viewDate" [events]="events"
+                [refresh]="refresh" (eventClicked)="handleEvent('Clicked', $event.event)"
+                (eventTimesChanged)="eventTimesChanged($event)">
+              </mwl-calendar-week-view>
+              <mwl-calendar-day-view *ngSwitchCase="CalendarView.Day" [viewDate]="viewDate" [events]="events"
+                [refresh]="refresh" (eventClicked)="handleEvent('Clicked', $event.event)"
+                (eventTimesChanged)="eventTimesChanged($event)">
+              </mwl-calendar-day-view>
+            </div>
+          </div>
+<app-chat></app-chat>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

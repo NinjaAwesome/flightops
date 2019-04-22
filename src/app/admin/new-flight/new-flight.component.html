@@ -1,0 +1,309 @@
+<app-header></app-header>
+<div class="container">
+  <div class="columns">
+    <div class="column is-3">
+      <app-side-nav></app-side-nav>
+    </div>
+    <div class="column is-9">
+      <h3 class="title">Add Flight</h3>
+      <form action="#" *ngIf="sale">
+        <section class="">
+          <!-- <h3 class="title">Live Leg</h3> -->
+          <div class="columns">
+            <div class="column is-4">
+              <div class="field">
+                <label class="label">Reference ID</label>
+                <div class="control">
+                  <input class="input" type="text" [(ngModel)]="reference_id" name="reference_id">
+                </div>
+              </div>
+            </div>
+            <div class="column is-4">
+              <div class="field">
+                <label class="label">OPS Employee</label>
+                <div class="control">
+                  <div class="select">
+                    <select [(ngModel)]="ops_crew" name="ops_crew">
+                      <option>OPS Employees</option>
+                      <option *ngFor="let ops_crew of ops_crews" [ngValue]="ops_crew">{{ops_crew.name}}</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="column is-4">
+              <div class="field">
+                <label class="label">Aircraft</label>
+                <div class="control">
+                  <div class="select">
+                    <select [(ngModel)]="aircraft" name="aircraft">
+                      <option>Suggested Aircraft</option>
+                      <option *ngFor="let aircraft of aircrafts" [ngValue]="aircraft">{{aircraft.registration}}
+                      </option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="columns">
+            <div class="column is-4">
+              <div class="field">
+                <label class="label">Departure Time</label>
+                <div class="control">
+                  <ng2-flatpickr [config]="exampleOptions" [(ngModel)]="departure_time" name="departure_time">
+                  </ng2-flatpickr>
+                  <!-- <input type="text" [(ngModel)]="departure_time" name="departure_time"> -->
+                </div>
+              </div>
+            </div>
+            <div class="column is-4">
+              <div class="field">
+                <label class="label">Departure Airport</label>
+                <div class="control">
+                  <div class="select">
+                    <select [(ngModel)]="departure_airport" name="departure_airport">
+                      <option>Suggested Departure Airport</option>
+                      <option *ngFor="let airport of airports" [ngValue]="airport">{{airport.name}}
+                      </option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="column is-4">
+              <div class="field">
+                <label class="label">Arrival Airport</label>
+                <div class="control">
+                  <div class="select">
+                    <select (ngModelChange)="getHandler($event)" [(ngModel)]="arrival_airport" name="arrival_airport">
+                      <option>Suggested Arrival Aiport</option>
+                      <option *ngFor="let airport of airports" [ngValue]="airport">{{airport.name}}
+                      </option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="columns">
+            <div class="column is-6">
+              <div class="field">
+                <label class="label">Handler</label>
+                <div class="control">
+                  <div class="select">
+                    <select [(ngModel)]="handler" name="handler">
+                      <option>Handler Values</option>
+                      <option *ngFor="let handler of handlers" [ngValue]="handler">{{handler.name}}</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="column is-6">
+              <div class="field">
+                <label class="label">Dangerous Good?</label>
+                <div class="control">
+                  <label class="radio">
+                    <input type="radio" name="answer" [(ngModel)]="dangerous" value="yes" name="dangerous">
+                    Yes
+                  </label>
+                  <label class="radio">
+                    <input type="radio" name="answer" [(ngModel)]="dangerous" value="no" name="dangerous">
+                    No
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="columns">
+            <div class="column is-6">
+              <div class="field">
+                <label class="label">Pax/Cargo</label>
+                <div class="control">
+                  <div class="select">
+                    <select #paxCargo1 [(ngModel)]="type" name="type" (change)="paxCargo(paxCargo1.value)">
+                      <option value="pax">Pax.</option>
+                      <option value="cargo">Cargo</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="column is-6">
+              <div class="field" id="pax">
+                <label class="label">Number of Passengers</label>
+                <div class="control">
+                  <input type="text" [(ngModel)]="pax" name="pax" class="input">
+                </div>
+              </div>
+              <div class="field" id="cargo" style="display: none;">
+                <label class="label">Weight of Cargo</label>
+                <div class="control">
+                  <input type="text" [(ngModel)]="cargo" name="cargo" class="input">
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="columns">
+            <div class="column is-6">
+              <div class="field is-grouped">
+                <div class="control">
+                  <button class="button is-link" (click)="doRoute()" id="addBtn">Submit</button>
+                </div>
+                <div class="control">
+                  <button class="button is-text" type="reset" id="reset">Reset</button>
+                  <button class="button is-text is-hidden" type="button" id="cancel" (click)="cancel()">Cancel</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </section>
+
+
+      </form>
+      <pre>{{result}}</pre>
+    </div>
+  </div>
+  <div class="modal" id="position-from">
+    <div class="modal-background"></div>
+    <div class="modal-card">
+      <form>
+        <header class="modal-card-head">
+          <p class="modal-card-title">Position From</p>
+        </header>
+        <section class="modal-card-body">
+          <div class="columns">
+            <div class="column is-5">
+              <div class="field">
+                <label class="label">Current Location</label>
+                <div class="control">
+                  <div class="select">
+
+                    <select (ngModelChange)="getHandler($event)" [(ngModel)]="currentLoc" name="currentLoc">
+                      <option>Suggested Current Aiport</option>
+                      <option *ngFor="let airport of airports" [ngValue]="airport">{{airport.name}}
+                      </option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="column is-5">
+              <div class="field">
+                <label class="label">Handler</label>
+                <div class="control">
+                  <div class="select">
+                    <select [(ngModel)]="fromHandler" name="fromHandler">
+                      <option>Handler Values</option>
+                      <option *ngFor="let handler of handlers" [ngValue]="handler">{{handler.name}}</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="column is-2">
+              <div class="field">
+                <label class="label">Layover Time</label>
+                <div class="control">
+                  <input class="input" type="text" name="fromLayOver" [(ngModel)]="fromLayOver">
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+
+        </section>
+        <footer class="modal-card-foot">
+          <button class="button is-success" id="positionBtn" (click)="doPositionFrom()">Position</button>
+          <button class="button is-text" type="reset" id="resetFrom">Reset</button>
+          <button class="button is-text is-hidden" type="button" id="cancelFrom" (click)="cancelFrom()">Cancel</button>
+        </footer>
+      </form>
+    </div>
+  </div>
+  <div class="modal" id="position-to">
+    <div class="modal-background"></div>
+    <div class="modal-card">
+      <form>
+        <header class="modal-card-head">
+          <p class="modal-card-title">Position To</p>
+        </header>
+        <section class="modal-card-body">
+          <div class="columns">
+            <div class="column is-5">
+              <div class="field">
+                <label class="label">Base Location</label>
+                <div class="control">
+                  <div class="select">
+
+                    <select (ngModelChange)="getHandler($event)" [(ngModel)]="baseLoc" name="baseLoc">
+                      <option>Suggested Base Aiport</option>
+                      <option *ngFor="let airport of airports" [ngValue]="airport">{{airport.name}}
+                      </option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="column is-5">
+              <div class="field">
+                <label class="label">Handler</label>
+                <div class="control">
+                  <div class="select">
+                    <select [(ngModel)]="toHandler" name="toHandler">
+                      <option>Handler Values</option>
+                      <option *ngFor="let handler of handlers" [ngValue]="handler">{{handler.name}}</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="column is-2">
+              <div class="field">
+                <label class="label">Layover Time</label>
+                <div class="control">
+                  <input class="input" type="text" name="toLayOver" [(ngModel)]="toLayOver">
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+
+        </section>
+        <footer class="modal-card-foot">
+          <button class="button is-success" id="positionToBtn" (click)="doPositionTo()">Position</button>
+          <button class="button is-text" type="reset" id="resetTo">Reset</button>
+          <button class="button is-text is-hidden" type="button" id="cancelTo" (click)="cancelTo()">Cancel</button>
+        </footer>
+      </form>
+    </div>
+  </div>
+  <div class="modal" id="suggested">
+    <div class="modal-background"></div>
+    <div class="modal-card">
+      <form>
+        <header class="modal-card-head">
+          <p class="modal-card-title">Suggested Actions</p>
+          <button class="delete" aria-label="close"></button>
+        </header>
+        <section class="modal-card-body">
+
+          <button class="button is-success is-block" (click)="createMail()">Send Crew Notification</button>
+          <button class="button is-success is-block" (click)="createHandlerMail()">Send Handling Request</button>
+
+
+
+        </section>
+      </form>
+    </div>
+  </div>
+</div>
+<app-chat></app-chat>

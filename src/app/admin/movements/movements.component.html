@@ -1,0 +1,48 @@
+<app-header></app-header>
+<div class="container">
+  <div class="columns">
+    <div class="column is-3">
+      <app-side-nav></app-side-nav>
+    </div>
+    <div class="column is-9">
+      <h3 class="title is-pulled-left">Movements Overview</h3>
+      <table class="table is-fullwidth">
+        <thead>
+          <th>Movement ID</th>
+          <th>Aircraft ID</th>
+          <th>PIC & FO</th>
+          <th>Origin/Destination</th>
+          <th>Departure</th>
+          <th>Arrival</th>
+          <th>Briefing Pack</th>
+        </thead>
+        <tbody>
+          <tr *ngFor="let movement of movements">
+            <td>
+              <a routerLink="/admin/movement/{{movement._id}}">
+                {{movement._id}}
+              </a>
+            </td>
+            <td>
+              {{movement.aircraft}}
+            </td>
+            <td>
+              {{movement.pic_crew_name}} & {{movement.fo_crew_name}}
+            </td>
+            <td>
+              {{movement.departure_airport}} / {{movement.arrival_airport}}
+            </td>
+            <td>
+              {{ movement.departuretime*1000 | date :  "short" }}
+            </td>
+            <td>
+              {{movement.arrivaltime*1000 | date : "short"}}
+            </td>
+            <td><a (click)="download(movement.route)">Download</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<app-chat></app-chat>

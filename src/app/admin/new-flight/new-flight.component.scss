@@ -1,0 +1,7 @@
+#tab-content .container_item {
+    display: none;
+  }
+  
+  #tab-content .container_item.is-active {
+    display: block;
+  }

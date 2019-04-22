@@ -1,0 +1,165 @@
+<app-header></app-header>
+<div class="container">
+  <div class="columns">
+    <div class="column is-3">
+      <app-side-nav></app-side-nav>
+    </div>
+    <div class="column is-9">
+      <div class="notification is-primary has-text-centered">
+        <ng-template [ngIf]="movement.departuretime*1000 < currentTime && movement.arrivaltime*1000 > currentTime" [ngIfElse]="onGround">
+            <h4 class="title is-size-5">In Progress</h4>
+          </ng-template>
+          
+          <ng-template #onGround>
+              <h4 class="title is-size-5">On Ground</h4>              
+          </ng-template>
+      </div>
+      <div class="columns is-mobile is-multiline">
+        <div class="column is-3">
+          <span class="header-icon user-profile-image" *ngIf="ops">
+            <img src="{{ops.img_url}}" alt="">
+          </span>
+          <div class="columns">
+            <div class="column is-6">
+
+              <span class="header-icon user-profile-image" *ngIf="pic">
+                <img src="{{pic.img_url}}" alt="">
+              </span>
+            </div>
+            <div class="column is-6">
+
+              <span class="header-icon user-profile-image" *ngIf="fo">
+                <img src="{{fo.img_url}}" alt="">
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="column is-9">
+          <aol-map [width]="'100%'" [height]="'350px'" *ngIf="arriveLat && departLat">
+            <aol-interaction-default></aol-interaction-default>
+            <aol-control-defaults></aol-control-defaults>
+            <aol-control-fullscreen></aol-control-fullscreen>
+
+            <aol-view [zoom]="4">
+              <aol-coordinate [x]="viewLat" [y]="viewLon" [srid]="'EPSG:4326'"></aol-coordinate>
+            </aol-view>
+
+            <aol-layer-tile [opacity]="1">
+              <aol-source-osm></aol-source-osm>
+            </aol-layer-tile>
+            <aol-layer-vector>
+              <aol-source-vector>
+                <aol-feature>
+                  <aol-geometry-polygon>
+                    <aol-collection-coordinates
+                      [coordinates]="[[departLat, departLon], [arriveLat, arriveLon]]"
+                      [srid]="'EPSG:4326'">
+                    </aol-collection-coordinates>
+                  </aol-geometry-polygon>
+                  <aol-style>
+                    <aol-style-stroke [color]="'red'" [width]="3"></aol-style-stroke>
+                    <aol-style-fill [color]="[255,0,0,0.1]"></aol-style-fill>
+                  </aol-style>
+                </aol-feature>
+
+              </aol-source-vector>
+            </aol-layer-vector>
+          </aol-map>
+        </div>
+        <div class="column is-5">
+          <div class="field has-addons">
+            <div class="control">
+              <input class="input" type="text" placeholder="Off-Block">
+            </div>
+            <div class="control">
+              <a class="button is-info">
+                Save
+              </a>
+            </div>
+          </div>
+          <div class="field has-addons">
+            <div class="control">
+              <input class="input" type="text" placeholder="Take off">
+            </div>
+            <div class="control">
+              <a class="button is-info">
+                Save
+              </a>
+            </div>
+          </div>
+          <div class="field has-addons">
+            <div class="control">
+              <input class="input" type="text" placeholder="Landing">
+            </div>
+            <div class="control">
+              <a class="button is-info">
+                Save
+              </a>
+            </div>
+          </div>
+          <div class="field has-addons">
+            <div class="control">
+              <input class="input" type="text" placeholder="On-Block">
+            </div>
+            <div class="control">
+              <a class="button is-info">
+                Save
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="column is-7">
+          <div class="columns">
+            <div class="column is-6">
+              <h3 class="title is-size-6">Notes (Operations):</h3>
+              <div class="field">
+                <div class="control">
+                  <textarea name="operation-note" class="textarea" id="operation-note"></textarea>
+                </div>
+              </div>
+              <button class="button is-link">Save</button>
+
+            </div>
+            <div class="column is-6">
+              <h3 class="title is-size-6">Notes (Flight Crew)</h3>
+              <div class="field">
+                <div class="control">
+                  <textarea name="crew-note" class="textarea" id="crew-note"></textarea>
+                </div>
+              </div>
+              <button class="button is-link">Save</button>
+
+            </div>
+          </div>
+        </div>
+        <div class="column is-6">
+          <table class="table is-fullwidth">
+            <thead>
+
+              <th>Departure NOTAM</th>
+            </thead>
+            <tbody>
+              <tr *ngFor="let notam of departureNOTAM">
+                <td>{{notam.iteme}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="column is-6">
+          <table class="table is-fullwidth">
+            <thead>
+
+              <th>Arrival NOTAM</th>
+            </thead>
+            <tbody>
+              <tr *ngFor="let notam of arrivalNOTAM">
+                <td>{{notam.iteme}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<app-chat></app-chat>

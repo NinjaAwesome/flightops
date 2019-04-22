@@ -1,0 +1,166 @@
+<app-header></app-header>
+<div class="container">
+  <div class="columns">
+    <div class="column is-3">
+      <app-side-nav></app-side-nav>
+    </div>
+    <div class="column is-9">
+      <h3 class="title is-pulled-left">Crews</h3>
+      <button class="button is-primary is-outlined is-pulled-right" id="btn-add-crew">Add Crew</button>
+      <table class="table is-fullwidth">
+        <thead>
+          <th></th>
+          <th>Name</th>
+          <th>Upcoming Movement</th>
+          <th>Current Status</th>
+        </thead>
+        <tbody>
+          <tr *ngFor="let crew of crews">
+            <td>
+              <a routerLink="/admin/crew/{{crew._id}}">
+                <img src="{{crew.img_url}}" class="crew-img" alt="">
+              </a>
+            </td>
+            <td>
+              <a routerLink="/admin/crew/{{crew._id}}">
+                {{crew.name}}
+              </a>
+            </td>
+            <td>
+              {{crew.name}}
+            </td>
+            <td>
+              On-duty
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="modal" id="add-crew">
+        <div class="modal-background"></div>
+        <div class="modal-card">
+          <form>
+            <header class="modal-card-head">
+              <p class="modal-card-title">Add Crew</p>
+              <button class="delete" aria-label="close"></button>
+            </header>
+            <section class="modal-card-body">
+              <div class="field">
+                <label class="label">Name</label>
+                <div class="control">
+                  <input class="input" type="text" name="name" [(ngModel)]="name">
+                </div>
+              </div>
+              <div class="columns">
+                <div class="column is-8">
+                  <div class="field">
+                    <label class="label">Photo</label>
+                    <div class="control">
+                      <progress *ngIf="currentFileUpload" class="progress is-primary" value="{{progress.percentage}}" max="100"></progress>
+                      <div class="file has-name">
+                        <label class="file-label"> <input type="file" class="file-input" (change)="selectFile($event)">
+                        <span class="file-cta">
+                          <span class="file-icon">
+                            <i class="fas fa-upload"></i>
+                          </span>
+                          <span class="file-label">
+                            Choose an image…
+                          </span>
+                        </span>
+                        <span class="file-name">
+                          .jpg, .png, .gif
+                        </span>
+                        </label>
+                      </div>
+
+                      <button class="button is-success" [disabled]="!selectedFiles" (click)="upload()">Upload</button>
+                    </div>
+                  </div>
+                </div>
+                <div class="column is-4">
+                  <div class="field">
+                    <label class="label">Occupation</label>
+                    <div class="control">
+                      <div class="select">
+                        <select name="occupation" [(ngModel)]="occupation">
+                          <option></option>
+                          <option>PIC</option>
+                          <option>FO</option>
+                          <option>OPS</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="columns">
+                <div class="column is-6">
+                  <div class="field">
+                    <label class="label">Primary Email</label>
+                    <div class="control">
+                      <input class="input" type="text" name="p_email" [(ngModel)]="p_email">
+                    </div>
+                  </div>
+                </div>
+                <div class="column is-6">
+                  <div class="field">
+                    <label class="label">Secondary Email</label>
+                    <div class="control">
+                      <input class="input" type="text" name="s_email" [(ngModel)]="s_email">
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="columns">
+
+                <div class="column is-6">
+                  <div class="field">
+                    <label class="label">Password</label>
+                    <div class="control">
+                      <input placeholder="Password" class="input" type="password" [(ngModel)]="password" name="password"
+                        required>
+                    </div>
+                  </div>
+                </div>
+                <div class="column is-6">
+                  <div class="field">
+                    <label class="label">Repeat Password</label>
+                    <div class="control">
+                      <input placeholder="Reapet Password" class="input" [(ngModel)]="repeatPassword" type="password"
+                        name="repeatPassword" required>
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="columns">
+                <div class="column is-6">
+                  <div class="field">
+                    <label class="label">Primary Phone Number</label>
+                    <div class="control">
+                      <input class="input" type="text" name="p_phone" [(ngModel)]="p_phone">
+                    </div>
+                  </div>
+                </div>
+                <div class="column is-6">
+                  <div class="field">
+                    <label class="label">Secondary Phone Number</label>
+                    <div class="control">
+                      <input class="input" type="text" name="s_phone" [(ngModel)]="s_phone">
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+
+            </section>
+            <footer class="modal-card-foot">
+              <button class="button is-success" id="addBtn" (click)="register()">Add</button>
+              <button class="button">Cancel</button>
+            </footer>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<app-chat></app-chat>

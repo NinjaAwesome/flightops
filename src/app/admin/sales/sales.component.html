@@ -1,0 +1,111 @@
+<app-header></app-header>
+<div class="container">
+  <div class="columns">
+    <div class="column is-3">
+      <app-side-nav></app-side-nav>
+    </div>
+    <div class="column is-9">
+      <h3 class="title is-pulled-left">Sales Overview</h3>
+      <a routerLink="/admin/add-sales" class="button is-primary is-outlined is-pulled-right">Add Sales</a>
+      <table class="table is-fullwidth">
+        <thead>
+          <th>ID</th>
+          <th>Client Name</th>
+          <th>Date Created</th>
+          <th>Flight Date</th>
+          <th>Flight Origin</th>
+          <th>Flight Destination</th>
+        </thead>
+        <tbody>
+          <tr *ngFor="let sale of sales">
+            <td>
+              <a routerLink="/admin/new-flight/{{sale._id}}">
+                {{sale._id}}
+              </a>
+            </td>
+            <td>
+                {{sale.contact_name}}
+            </td>
+            <td>
+              2019-02-11 11:00PM
+            </td>
+            <td>
+              {{sale.departure}}
+            </td>
+            <td>{{sale.origin_airport}}</td>
+            <td>{{sale.destination_airport}}</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="modal" id="add-aircraft">
+        <div class="modal-background"></div>
+        <div class="modal-card">
+          <header class="modal-card-head">
+            <p class="modal-card-title">Add Aircraft</p>
+            <button class="delete" aria-label="close"></button>
+          </header>
+          <section class="modal-card-body">
+            <div class="field">
+              <label class="label">Registration</label>
+              <div class="control">
+                <input class="input" type="text" placeholder="">
+              </div>
+            </div>
+            <div class="field">
+              <label class="label">Photo</label>
+              <div class="control">
+                <div class="file has-name">
+                  <label class="file-label">
+                    <input class="file-input" type="file" name="resume">
+                    <span class="file-cta">
+                      <span class="file-icon">
+                        <i class="fas fa-upload"></i>
+                      </span>
+                      <span class="file-label">
+                        Choose an image…
+                      </span>
+                    </span>
+                    <span class="file-name">
+                      .jpg, .png, .gif
+                    </span>
+                  </label>
+                </div>
+              </div>
+            </div>
+            <div class="field">
+              <label class="label">Max Take Off Weight</label>
+              <div class="control">
+                <input class="input" type="text" placeholder="">
+              </div>
+            </div>
+            <div class="field">
+              <label class="label">Max Fuel Capacity</label>
+              <div class="control">
+                <input class="input" type="text" placeholder="">
+              </div>
+            </div>
+            <div class="field">
+              <label class="label">Max PAX</label>
+              <div class="control">
+                <input class="input" type="text" placeholder="">
+              </div>
+            </div>
+            <div class="field">
+              <label class="label">Max Cargo</label>
+              <div class="control">
+                <input class="input" type="text" placeholder="">
+              </div>
+            </div>
+
+
+          </section>
+          <footer class="modal-card-foot">
+            <button class="button is-success">Add</button>
+            <button class="button">Cancel</button>
+          </footer>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<app-chat></app-chat>

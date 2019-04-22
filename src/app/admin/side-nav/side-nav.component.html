@@ -1,0 +1,36 @@
+<aside class="menu is-hidden-mobile">
+  <p class="menu-label">
+    General
+  </p>
+  <ul class="menu-list">
+    <li><a routerLink="/admin/dashboard" routerLinkActive="is-active">Dashboard</a></li>
+    <li><a routerLink="/admin/aircrafts" routerLinkActive="is-active">Aircrafts</a></li>
+    <li><a routerLink="/admin/airports" routerLinkActive="is-active">Airports</a></li>
+    <li><a routerLink="/admin/handlers" routerLinkActive="is-active">Handlers</a></li>
+    <li><a routerLink="/admin/crews" routerLinkActive="is-active">Crews</a></li>
+    <li><a routerLink="/admin/movements" routerLinkActive="is-active">Movements</a></li>
+    <li><a routerLink="/admin/sales" routerLinkActive="is-active">Sales</a></li>
+    <li><a routerLink="/admin/new-flight/new" routerLinkActive="is-active">New Flight</a></li>
+    <li><a routerLink="/admin/settings" routerLinkActive="is-active">Settings</a></li>
+  </ul>
+  <div class="box">
+    <article class="media">
+      <div class="media-content">
+        <div class="content has-text-centered	">
+          <h5 class="is-marginless">Zulu Time</h5>
+          <time datetime="2016-1-1">{{zuluTime}}</time>
+        </div>
+      </div>
+    </article>
+  </div>
+  <div class="box">
+    <article class="media">
+      <div class="media-content">
+        <div class="content has-text-centered	">
+          <h5 class="is-marginless">Local Time</h5>
+          <time datetime="2016-1-1">{{localTime}}</time>
+        </div>
+      </div>
+    </article>
+  </div>
+</aside>

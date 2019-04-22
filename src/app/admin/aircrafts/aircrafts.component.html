@@ -1,0 +1,137 @@
+<app-header></app-header>
+<div class="container">
+  <div class="columns">
+    <div class="column is-3">
+      <app-side-nav></app-side-nav>
+    </div>
+    <div class="column is-9">
+      <h3 class="title is-pulled-left">Aircrafts Overview</h3>
+      <button class="button is-primary is-outlined is-pulled-right" id="btn-add-aircraft">Add Aircraft</button>
+      <table class="table is-fullwidth">
+        <thead>
+          <th></th>
+          <th>Registration</th>
+          <th>Upcoming Movement</th>
+          <th>Current Status</th>
+        </thead>
+        <tbody>
+          <tr *ngFor="let aircraft of aircrafts">
+            <td>
+              <a routerLink="/admin/aircraft/{{aircraft._id}}">
+                <img src="{{aircraft.img_url}}" class="aircraft-img" alt="">
+              </a>
+            </td>
+            <td>
+              <a routerLink="/admin/aircraft/{{aircraft._id}}">
+                {{aircraft.registration}}
+              </a>
+            </td>
+            <td>
+            </td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+      <app-chat></app-chat>
+
+      <div class="modal" id="add-aircraft">
+        <div class="modal-background"></div>
+        <div class="modal-card">
+          <form>
+            <header class="modal-card-head">
+              <p class="modal-card-title">Add Aircraft</p>
+              <button class="delete" aria-label="close"></button>
+            </header>
+            <section class="modal-card-body">
+              <div class="field">
+                <label class="label">Registration</label>
+                <div class="control">
+                  <input class="input" type="text" name="registration" [(ngModel)]="registration">
+                </div>
+              </div>
+              <div class="field">
+                <label class="label">Aircraft ID</label>
+                <div class="control">
+                  <input class="input" type="text" name="aircraftId" [(ngModel)]="aircraftId">
+                </div>
+              </div>
+
+              <div class="field">
+                <label class="label">Photo</label>
+                <div class="control">
+                  <progress *ngIf="currentFileUpload" class="progress is-primary" value="{{progress.percentage}}"
+                    max="100"></progress>
+                  <div class="file has-name">
+                    <label class="file-label"> <input type="file" class="file-input" (change)="selectFile($event)">
+                      <span class="file-cta">
+                        <span class="file-icon">
+                          <i class="fas fa-upload"></i>
+                        </span>
+                        <span class="file-label">
+                          Choose an image…
+                        </span>
+                      </span>
+                      <span class="file-name">
+                        .jpg, .png, .gif
+                      </span>
+                    </label>
+                  </div>
+
+                  <button class="button is-success" [disabled]="!selectedFiles" (click)="upload()">Upload</button>
+                </div>
+              </div>
+
+              <div class="field">
+                <label class="label">Max Take Off Weight</label>
+                <div class="control">
+                  <input class="input" type="text" [(ngModel)]="tow" name="tow">
+                </div>
+              </div>
+              <div class="field">
+                <label class="label">Max Fuel Capacity</label>
+                <div class="control">
+                  <input class="input" type="text" [(ngModel)]="fuel" name="fuel">
+                </div>
+              </div>
+              <div class="field">
+                <label class="label">Max PAX</label>
+                <div class="control">
+                  <input class="input" type="text" [(ngModel)]="pax" name="pax">
+                </div>
+              </div>
+              <div class="field">
+                <label class="label">Max Cargo</label>
+                <div class="control">
+                  <input class="input" type="text" [(ngModel)]="cargo" name="cargo">
+                </div>
+              </div>
+              <div class="field">
+                <label class="label">ICAO 24</label>
+                <div class="control">
+                  <input class="input" type="text" [(ngModel)]="icao24" name="icao24">
+                </div>
+              </div>
+              <div class="field">
+                <label class="label">Base Location</label>
+                <div class="control">
+                  <div class="select">
+                    <select [(ngModel)]="base" name="base">
+                      <option *ngFor="let airport of airports" [value]="airport.iata_code">{{airport.iata_code}}
+                      </option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+
+            </section>
+            <footer class="modal-card-foot">
+              <button class="button is-success" id="addBtn" (click)="addAircraft()">Add</button>
+              <button class="button">Cancel</button>
+            </footer>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,93 @@
+<div class="column is-4 is-hidden" id="chatCon">
+    <div class="panel" *ngIf="joinned; else joinroom">
+      <div class="panel-heading">
+        {{ msgData.room }}
+        <!-- <button type="button" class="button" (click)="logout()">
+          Leave Room
+        </button> -->
+      <button class="delete" aria-label="close" style="float: right;" (click)="hideChat()"></button>
+      </div>
+      <div class="panel-block">
+        <div #scrollMe style="height: 300px; width: 100%; overflow: auto;">
+          <ul class="chat">
+            <li *ngFor="let c of chats">
+              <div class="clearfix" *ngIf="c.email===msgData.email; else rightchat">
+                <div class="chat-body clearfix">
+                  <!-- <div class="header">
+                    <strong class="primary-font">{{ c.email }}</strong> <small class="pull-right text-muted">
+                      <span class="glyphicon glyphicon-time"></span>{{ c.updated_at | date: 'medium' }}</small>
+                  </div> -->
+                  <!-- <p style="text-align: right;">
+                    <small>{{ c.email }}</small>
+                  </p> -->
+                  <p style="text-align: right;">
+                    <span class="tag is-info is-medium">{{ c.message }}</span>
+                  </p>
+                  <p style="text-align: right;">
+                    <small>{{ c.updated_at | date: 'medium' }}</small>
+                  </p>
+                </div>
+              </div>
+              <ng-template #rightchat>
+                <div class="clearfix">
+                  <div class="chat-body clearfix">
+                    <!-- <div class="header">
+                      <small class=" text-muted"><span
+                          class="glyphicon glyphicon-time"></span>{{ c.updated_at | date: 'medium' }}</small>
+                      <strong class="pull-right primary-font">{{ c.email }}</strong>
+                    </div> -->
+                    <p>
+                      <small>{{ c.email }}</small>
+                    </p>
+                    <p>
+                      <span class="tag is-success is-medium">{{ c.message }}</span>
+                    </p>
+                    <p>
+                      <small>{{ c.updated_at | date: 'medium' }}</small>
+                    </p>
+                  </div>
+                </div>
+              </ng-template>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="panel-block">
+        <form (ngSubmit)="sendMessage()" #msgForm="ngForm" style="width: 100%">
+          <div class="field has-addons">
+            <div class="control is-expanded">
+              <input type="hidden" [(ngModel)]="msgData.room" name="room" />
+              <input type="hidden" [(ngModel)]="msgData.email" name="email" />
+              <input class="input" [(ngModel)]="msgData.message" name="message" type="text"
+                placeholder="Type your message here..." required="" />
+            </div>
+            <div class="control">
+              <button class="button is-info" [disabled]="!msgForm.form.valid">
+                Send
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+    <ng-template #joinroom>
+      <div class="panel panel-primary">
+        <div class="panel-body">
+          <h1>Select Chat Room</h1>
+          <form (ngSubmit)="joinRoom()" #joinForm="ngForm">
+            <div class="field">
+              <select class="select" [(ngModel)]="newUser.room" name="room" required="">
+                <option>Select Room</option>
+                <option>General</option>
+                <option>Admin</option>
+              </select>
+            </div>
+            <div class="field">
+              <button type="submit" class="button is-success" [disabled]="!joinForm.form.valid">Join</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </ng-template>
+  </div>
+  <button class="button is-primary is-rounded is-medium" id="chatBtn" type="button" (click)="showChat()">Chat</button>

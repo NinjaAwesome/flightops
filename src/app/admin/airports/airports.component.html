@@ -1,0 +1,36 @@
+<app-header></app-header>
+<div class="container">
+  <div class="columns">
+    <div class="column is-3">
+      <app-side-nav></app-side-nav>
+    </div>
+    <div class="column is-9">
+      <h3 class="title is-pulled-left">Airport Overview</h3>
+      <button class="button is-primary is-outlined is-pulled-right" routerLink="/admin/new-airport">Add Airport</button>
+      <table class="table is-fullwidth">
+        <thead>
+          <th></th>
+          <th>Name</th>
+          <th>IATA Code</th>
+          <th>Primary Phone</th>
+          <th>Primary Email</th>
+        </thead>
+        <tbody>
+          <tr *ngFor="let airport of airports">
+            <td>
+                <img src="{{airport.logo}}" class="aircraft-img" alt="">
+            </td>
+            <td>
+                {{airport.name}}
+            </td>
+            <td>{{airport.iata_code}}</td>
+            <td>{{airport.phone_primary}}</td>
+            <td>{{airport.email_primary}}</td>
+          </tr>
+        </tbody>
+      </table>
+      <app-chat></app-chat>
+
+    </div>
+  </div>
+</div>

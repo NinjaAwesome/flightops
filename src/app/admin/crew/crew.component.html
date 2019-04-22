@@ -1,0 +1,204 @@
+<app-header></app-header>
+<div class="container">
+  <div class="columns">
+    <div class="column is-3">
+      <app-side-nav></app-side-nav>
+    </div>
+    <div class="column is-9" *ngIf="crew">
+      <div class="notification is-primary has-text-centered">
+          <h4 class="title is-size-5">{{status}}</h4>
+        
+      </div>
+      <div class="columns is-mobile is-multiline">
+        <div class="column is-3">
+          <span class="header-icon user-profile-image">
+            <img src="{{crew.img_url}}" alt="">
+          </span>
+        </div>
+        <div class="column is-9">
+
+        </div>
+        <div class="column is-5">
+          <span class="title is-bold is-pulled-left">{{crew.name}}</span>
+          <button class="button is-primary is-outlined is-pulled-right" (click)="showAddLicence()"
+            id="btn-add-licence">Add Licence</button>
+          <table class="table is-fullwidth">
+            <thead>
+              <th>Licence</th>
+              <th>Expiry</th>
+            </thead>
+            <tbody>
+              <tr *ngFor="let licence of licences">
+                <td>{{licence.licence}}</td>
+                <td>{{licence.expiry}}</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="modal" id="add-licence">
+            <div class="modal-background"></div>
+            <div class="modal-card">
+              <form>
+                <header class="modal-card-head">
+                  <p class="modal-card-title">Add Licence</p>
+                  <button class="delete" aria-label="close" (click)="hideAddLicence()"></button>
+                </header>
+                <section class="modal-card-body">
+
+                  <div class="columns">
+                    <div class="column is-6">
+                      <div class="field">
+                        <label class="label">Licence</label>
+                        <div class="control">
+                          <input class="input" type="text" name="licence" [(ngModel)]="licence">
+                        </div>
+                      </div>
+                    </div>
+                    <div class="column is-6">
+                      <div class="field">
+                        <label class="label">Expiry Date</label>
+                        <div class="control">
+                          <input class="input" type="text" name="expiry" [(ngModel)]="expiry">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+
+
+                </section>
+                <footer class="modal-card-foot">
+                  <button class="button is-success" id="addBtn" (click)="addLicence()">Add</button>
+                  <button class="button">Cancel</button>
+                </footer>
+              </form>
+            </div>
+          </div>
+        </div>
+        <div class="column is-7">
+          <div class="columns">
+            <div class="column is-6">
+              <h3 class="title is-size-6">Upcoming Movements</h3>
+              <div *ngFor="let schedule of schedule;  let i=index">
+                <div class="box" *ngIf="i<4 && schedule.departuretime*1000 > currentTime">
+                <article class="media">
+                  <div class="media-content">
+                    <div class="content has-text-centered	">
+                      <a routerLink="/admin/movement/{{schedule._id}}">
+                        <h5 class="is-marginless">{{schedule.departure_airport}} -> {{schedule.arrival_airport}}</h5>
+                      </a>
+                      <time datetime="2016-1-1">{{schedule.departuretime*1000 | date : "short"}}</time>
+                    </div>
+                  </div>
+                </article>
+              </div>
+            </div>
+
+            </div>
+            <div class="column is-6">
+              <h3 class="title is-size-6">Past Movements</h3>
+              <div *ngFor="let schedule of schedule;  let i=index">
+                <div class="box" *ngIf="i<4 && schedule.departuretime*1000 < currentTime">
+                  <article class="media">
+                    <div class="media-content">
+                      <div class="content has-text-centered	">
+                        <a routerLink="/admin/movement/{{schedule._id}}">
+                          <h5 class="is-marginless">{{schedule.departure_airport}} -> {{schedule.arrival_airport}}</h5>
+                        </a>
+                        <time datetime="2016-1-1">{{schedule.departuretime*1000 | date : "short"}}</time>
+                      </div>
+                    </div>
+                  </article>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal">
+        <div class="modal-background"></div>
+        <div class="modal-card">
+          <header class="modal-card-head">
+            <p class="modal-card-title">Modal title</p>
+            <button class="delete" aria-label="close"></button>
+          </header>
+          <section class="modal-card-body">
+            <div>
+              Event:
+              <pre>{{ modalData?.event | json }}</pre>
+            </div>
+            <!-- Content ... -->
+          </section>
+          <footer class="modal-card-foot">
+            <button class="button is-success">Save changes</button>
+            <button class="button">Cancel</button>
+          </footer>
+        </div>
+      </div>
+      <div class="columns">
+        <div class="column is-4">
+          <div class="field has-addons">
+            <p class="control">
+              <a class="button is-primary" mwlCalendarPreviousView [view]="view" [(viewDate)]="viewDate"
+                (viewDateChange)="activeDayIsOpen = false">
+                Previous
+              </a>
+            </p>
+            <p class="control">
+              <a class="button is-primary is-outlined" mwlCalendarToday [(viewDate)]="viewDate">
+                Today
+              </a>
+            </p>
+            <p class="control">
+              <a class="button is-primary" mwlCalendarNextView [view]="view" [(viewDate)]="viewDate"
+                (viewDateChange)="activeDayIsOpen = false">
+                Next
+              </a>
+            </p>
+          </div>
+        </div>
+        <div class="column is-4">
+          <h3 class="title has-text-centered">{{ viewDate | calendarDate:(view + 'ViewTitle'):'en' }}</h3>
+        </div>
+        <div class="column is-4">
+          <div class="field has-addons is-pulled-right">
+            <p class="control">
+              <a class="button is-primary" (click)="view = CalendarView.Month"
+                [class.active]="view === CalendarView.Month">
+                Month
+              </a>
+            </p>
+            <p class="control">
+              <a class="button is-primary" (click)="view = CalendarView.Week"
+                [class.active]="view === CalendarView.Week">
+                Week
+              </a>
+            </p>
+            <p class="control">
+              <a class="button is-primary" (click)="view = CalendarView.Day" [class.active]="view === CalendarView.Day">
+                Day
+              </a>
+            </p>
+          </div>
+        </div>
+      </div>
+      <div [ngSwitch]="view" *ngIf="crew">
+        <mwl-calendar-month-view *ngSwitchCase="CalendarView.Month" [viewDate]="viewDate" [events]="events"
+          [refresh]="refresh" [activeDayIsOpen]="activeDayIsOpen" (dayClicked)="dayClicked($event.day)"
+          (eventClicked)="handleEvent('Clicked', $event.event)" (eventTimesChanged)="eventTimesChanged($event)">
+        </mwl-calendar-month-view>
+        <mwl-calendar-week-view *ngSwitchCase="CalendarView.Week" [viewDate]="viewDate" [events]="events"
+          [refresh]="refresh" (eventClicked)="handleEvent('Clicked', $event.event)"
+          (eventTimesChanged)="eventTimesChanged($event)">
+        </mwl-calendar-week-view>
+        <mwl-calendar-day-view *ngSwitchCase="CalendarView.Day" [viewDate]="viewDate" [events]="events"
+          [refresh]="refresh" (eventClicked)="handleEvent('Clicked', $event.event)"
+          (eventTimesChanged)="eventTimesChanged($event)">
+        </mwl-calendar-day-view>
+      </div>
+
+    </div>
+  </div>
+</div>
+<app-chat></app-chat>

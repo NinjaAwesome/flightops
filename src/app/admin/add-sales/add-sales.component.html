@@ -1,0 +1,174 @@
+<app-header></app-header>
+<div class="container">
+  <div class="columns">
+    <div class="column is-3">
+      <app-side-nav></app-side-nav>
+    </div>
+    <div class="column is-9">
+      <h3 class="title">Add Sale</h3>
+      <section class="section">
+        <form action="#">
+          <div class="columns">
+            <div class="column is-6">
+              <div class="field">
+                <label class="label">Company Name</label>
+                <div class="control">
+                  <input class="input" type="text" name="company_name" [(ngModel)]="company_name">
+                </div>
+              </div>
+            </div>
+            <div class="column is-6">
+              <div class="field">
+                <label class="label">Contact Name</label>
+                <div class="control">
+                  <input class="input" type="text" name="contact_name" [(ngModel)]="contact_name">
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="columns">
+            <div class="column is-6">
+              <div class="field">
+                <label class="label">Contact Phone</label>
+                <div class="control">
+                  <input class="input" type="text" name="contact_phone" [(ngModel)]="contact_phone">
+                </div>
+              </div>
+            </div>
+            <div class="column is-6">
+              <div class="field">
+                <label class="label">Contact Email</label>
+                <div class="control">
+                  <input class="input" type="text" name="contact_email" [(ngModel)]="contact_email">
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="columns">
+            <div class="column is-6">
+              <div class="field">
+                <label class="label">Weight</label>
+                <div class="control">
+                  <input class="input" type="text" name="weight" [(ngModel)]="weight">
+                </div>
+              </div>
+            </div>
+            <div class="column is-6">
+              <div class="field">
+                <label class="label">Dangerous Good?</label>
+                <div class="control">
+                  <label class="radio">
+                    <input type="radio" name="dangerous" value="Yes" [(ngModel)]="dangerous">
+                    Yes
+                  </label>
+                  <label class="radio">
+                    <input type="radio" name="dangerous" value="No" [(ngModel)]="dangerous">
+                    No
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="columns">
+            <div class="column is-6">
+              <div class="field">
+                <label class="label">Description</label>
+                <div class="control">
+                  <textarea class="textarea" name="description" [(ngModel)]="description"></textarea>
+                </div>
+              </div>
+            </div>
+            <div class="column is-6">
+              <div class="field">
+                <label class="label">Special Instructions</label>
+                <div class="control">
+                  <textarea class="textarea" name="instructions" [(ngModel)]="instructions"></textarea>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="columns">
+            <div class="column is-6">
+              <div class="field">
+                <label class="label">Origin Airport</label>
+                <div class="control">
+                  <div class="select">
+                    <select [(ngModel)]="origin_airport" name="origin_airport">
+                      <option *ngFor="let airport of airports" [value]="airport.iata_code">{{airport.iata_code}}
+                      </option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="column is-6">
+              <div class="field">
+                <label class="label">Destination Airport</label>
+                <div class="control">
+                  <div class="select">
+                    <select [(ngModel)]="destination_airport" name="destination_airport">
+                      <option *ngFor="let airport of airports" [value]="airport.iata_code">{{airport.iata_code}}
+                      </option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="columns">
+            <div class="column is-6">
+              <div class="field">
+                <label class="label">Departure</label>
+                <div class="control">
+                    <ng2-flatpickr [config]="exampleOptions" [(ngModel)]="departure" name="departure">
+                    </ng2-flatpickr>
+                </div>
+              </div>
+            </div>
+            <div class="column is-6">
+                <div class="field">
+                    <label class="label">Reference ID</label>
+                    <div class="control">
+                  <input type="text" class="input" name="reference_id" [(ngModel)]="reference_id">
+                    </div>
+                  </div>
+            </div>
+          </div>
+
+          <div class="columns">
+            <div class="column is-6">
+              <div class="field">
+                <label class="label">Estimated Cost</label>
+                <div class="control">
+                  <input type="text" class="input" name="estimated_cost" [(ngModel)]="estimated_cost">
+                </div>
+              </div>
+            </div>
+            <div class="column is-6">
+              <div class="field">
+                <label class="label">Price Charged</label>
+                <div class="control">
+                  <input type="text" class="input" name="price_charged" [(ngModel)]="price_charged">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="field is-grouped">
+            <div class="control">
+              <button class="button is-link" (click)="addSale()">Submit</button>
+            </div>
+            <div class="control">
+              <button class="button is-text" type="reset">Reset</button>
+            </div>
+          </div>
+        </form>
+      </section>
+    </div>
+  </div>
+</div>
+<app-chat></app-chat>

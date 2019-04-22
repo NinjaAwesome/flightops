@@ -1,0 +1,120 @@
+<app-header></app-header>
+<div class="container">
+  <div class="columns">
+    <div class="column is-3">
+      <app-side-nav></app-side-nav>
+    </div>
+    <div class="column is-9">
+      <h3 class="title is-pulled-left">Users Overview</h3>
+      <button class="button is-primary is-outlined is-pulled-right" id="btn-add-user">Add User</button>
+      <table class="table is-fullwidth">
+        <thead>
+          <th>ID</th>
+          <th>Fullname</th>
+          <th>Email Address</th>
+          <th>Date Created</th>
+        </thead>
+        <tbody>
+          <tr *ngFor="let user of users">
+            <td>
+              <a routerLink="/admin/new-flight/{{user._id}}">
+                {{user._id}}
+              </a>
+            </td>
+            <td>
+              {{user.fullname}}
+            </td>
+            <td>
+              {{user.email}}
+            </td>
+            <td>{{user.createdAt}}</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="columns">
+        <div class="column is-6" *ngIf="crewTemplate">
+
+            <h3 class="title">Crew Mail Template</h3>
+
+            <div class="field">
+              <label class="label">Subject</label>
+              <div class="control">
+                <input type="text" placeholder="Type Subject Here..." name="crew_subject" [(ngModel)]="crewTemplate.subject" class="input">
+              </div>
+            </div>
+            <div class="field">
+              <label class="label">Message</label>
+              <div class="control">
+                <textarea placeholder="Type Message Here..." name="crew_message" [(ngModel)]="crewTemplate.message" class="textarea" (change)="handleCrewChange($event.target.value)" [(ngModel)]="crewTemplate.message"></textarea>
+              </div>
+            </div>
+            <button class="button is-success" (click)="saveCrew()">Save</button>
+        </div>
+        <div class="column is-6" *ngIf="handlerTemplate">
+
+          <h3 class="title">Handler Mail Template</h3>
+
+          <div class="field">
+            <label class="label">Subject</label>
+            <div class="control">
+              <input type="text" placeholder="Type Subject Here..." name="subject" [(ngModel)]="handlerTemplate.subject" class="input">
+            </div>
+          </div>
+          <div class="field">
+            <label class="label">Message</label>
+            <div class="control">
+              <textarea placeholder="Type Message Here..." name="message" class="textarea" [(ngModel)]="handlerTemplate.message"></textarea>
+            </div>
+          </div>
+          <button class="button is-success" (click)="saveHandler()">Save</button>
+        </div>
+      </div>
+      <div class="modal" id="add-user">
+        <div class="modal-background"></div>
+        <div class="modal-card">
+          <header class="modal-card-head">
+            <p class="modal-card-title">Add User</p>
+            <button class="delete" aria-label="close"></button>
+          </header>
+          <section class="modal-card-body" [formGroup]="userForm">
+            <div class="field">
+              <label class="label">Fullname</label>
+              <div class="control">
+                <input matInput placeholder="Fullname" formControlName="fullname" name="fullname" required>
+              </div>
+            </div>
+            <div class="field">
+              <label class="label">Email</label>
+              <div class="control">
+                <input matInput placeholder="Email" formControlName="email" name="email" required>
+
+              </div>
+            </div>
+            <div class="field">
+              <label class="label">Password</label>
+              <div class="control">
+                <input matInput placeholder="Password" formControlName="password" type="password" name="password"
+                  required>
+              </div>
+            </div>
+            <div class="field">
+              <label class="label">Repeat Password</label>
+              <div class="control">
+                <input matInput placeholder="Reapet Password" formControlName="repeatPassword" type="password"
+                  name="repeatPassword" required>
+
+              </div>
+            </div>
+
+
+          </section>
+          <footer class="modal-card-foot">
+            <button class="button is-success" (click)="register()">Add</button>
+            <button class="button">Cancel</button>
+          </footer>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<app-chat></app-chat>
